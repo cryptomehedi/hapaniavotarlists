@@ -10,8 +10,11 @@ const SearchBar = () => {
         e.preventDefault();
         setSpin(true)
         const number = e.target.value
-        const serial =  dataLists.find(i =>  i.NID == +number);
+        const serial =  dataLists.find(votar =>  votar.NID == +number);
+        // const serial =  dataLists.find(votar =>  number.includes(votar.NID));
+        // const serial2 =  dataLists.find(votar =>  votar.NID.includes(number));
         setVotar(serial);
+        // console.log( serial2);
 
         setTimeout(() => {
             setSpin(false)

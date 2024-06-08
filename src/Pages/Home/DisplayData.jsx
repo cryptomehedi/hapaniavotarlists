@@ -3,7 +3,7 @@ const DisplayData = ({votar}) => {
     const { SLN, name, NID, gender, father } = votar
   return (
     <div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-2xl p-2">
 
         <div className="card w-auto bg-base-100 shadow-xl">
             <div className="card-body">

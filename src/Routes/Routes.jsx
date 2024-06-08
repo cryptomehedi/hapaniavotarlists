@@ -7,6 +7,7 @@ import NotFound from "../Pages/Shared/NotFound";
 import MenLists from "../Pages/Men/MenLists";
 import WomenLists from "../Pages/Women/WomenLists";
 import Login from "../Pages/Login/Login";
+import VotarDataAdd from "../Pages/DataUolpad/VotarDataAdd";
 
   export const router = createBrowserRouter([
     {
@@ -27,8 +28,12 @@ import Login from "../Pages/Login/Login";
             element: <WomenLists />
         },
         {
-            path: "/login",
-            element: <Login/>
+            path: '/login',
+            element: <Login />
+        },
+        {
+          path: "/votaradd",
+          element: <VotarDataAdd />
         }
       ]
     },
