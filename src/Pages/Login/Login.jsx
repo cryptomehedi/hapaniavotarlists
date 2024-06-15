@@ -35,7 +35,12 @@ const Login = () => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    console.log(email, password);
+    if (email.length > 0 || password > 0) {
+      setErrMsg("");
+      console.log(email, password);
+    } else {
+      setErrMsg("Email & Password Field Must Be Filled");
+    }
   };
 
   return (
@@ -52,6 +57,7 @@ const Login = () => {
                 ref={emailRef}
                 type="email"
                 placeholder="email"
+                required
                 className="input input-bordered"
               />
             </div>

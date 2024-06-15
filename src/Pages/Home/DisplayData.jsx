@@ -12,7 +12,8 @@ const DisplayData = ({votar}) => {
                 <p>Gender: {gender}</p>
                 <p>NID: {NID}</p>
                 <p>Serial NO: {SLN}</p>
-                <div className="card-actions justify-end">
+                <div className="card-actions mt-2 justify-between">
+                    <button className="btn ">Edit</button>
                     <button className="btn ">Checked</button>
                 </div>
             </div>
