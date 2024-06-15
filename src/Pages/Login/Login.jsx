@@ -4,6 +4,7 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import SweetAlertMessage from "../Shared/SweetAlertMessage";
 
 const Login = () => {
   const [lgDisabled, setLgDisabled] = useState(true);
@@ -35,10 +36,13 @@ const Login = () => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
+    
     if (email.length > 0 || password > 0) {
       setErrMsg("");
       console.log(email, password);
+      SweetAlertMessage({title: "Connecting To Server" , lastTitle: "Login Successfully"})
     } else {
+      SweetAlertMessage({title: "Connecting To Server",icon:"error" ,lastTitle: "Oops..!!", text:"Something went Wrong !"})
       setErrMsg("Email & Password Field Must Be Filled");
     }
   };
