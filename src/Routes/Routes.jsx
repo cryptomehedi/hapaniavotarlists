@@ -4,10 +4,9 @@ import {
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import NotFound from "../Pages/Shared/NotFound";
-import MenLists from "../Pages/Men/MenLists";
-import WomenLists from "../Pages/Women/WomenLists";
 import Login from "../Pages/Login/Login";
 import VotarDataAdd from "../Pages/DataUolpad/VotarDataAdd";
+import UserData from "../Pages/UserData/UserData";
 
   export const router = createBrowserRouter([
     {
@@ -21,11 +20,11 @@ import VotarDataAdd from "../Pages/DataUolpad/VotarDataAdd";
         },
         {
             path: "/menLists" ,
-            element: <MenLists/>
+            element: <UserData />
         },
         {
             path: "/womenLists" ,
-            element: <WomenLists />
+            element: <UserData />
         },
         {
             path: '/login',
