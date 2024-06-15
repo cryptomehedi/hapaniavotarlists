@@ -4,8 +4,8 @@ import DisplayData from "../Home/DisplayData"
 
 const UserData = () => {
     let userData
-    const location = useLocation().pathname.slice(1)
-    if (location === "menLists"){
+    const path = useLocation().pathname.slice(1)
+    if (path === "menLists"){
          userData = dataLists.filter(i => i.gender === "male")
       } else {
         userData = dataLists.filter(i => i.gender === "female")
