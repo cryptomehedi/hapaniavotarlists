@@ -1,29 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dataLists from "../../Data/DataList.json"
 import DisplayData from "./DisplayData";
-import Spinner from "../Shared/Spinner";
 
 const SearchBar = () => {
-    const [votar, setVotar] = useState()
-    const [spin, setSpin] = useState(false)
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setSpin(true)
-        const number = e.target.value
-        const serial =  dataLists.find(votar =>  votar.NID == +number);
-        // const serial =  dataLists.find(votar =>  number.includes(votar.NID));
-        // const serial2 =  dataLists.find(votar =>  votar.NID.includes(number));
-        setVotar(serial);
-        // console.log( serial2);
+    const [votar, setVotar] = useState([])
+    const [search, setSearch] = useState()
 
-        setTimeout(() => {
-            setSpin(false)
-        }, 500);
-    }
+    useEffect(() => {
+      if (dataLists) {
+        let filtered = dataLists
+  
+        if (search) {
+          filtered = filtered.filter(list =>
+            list.NID.toString().startsWith(search) || list.SLN.toString().startsWith(search)
+          )
+        }
+        console.log(filtered);
+        setVotar(filtered)
+      }
+    }, [search])
+    
+
+
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     setSpin(true)
+    //     const number = e.target.value
+    //     const serial =  dataLists.find(votar =>  votar.NID == +number);
+    //     // const serial =  dataLists.find(votar =>  number.includes(votar.NID));
+    //     const serial2 =  dataLists.filter(votar =>  votar.NID.includes(number));
+    //     setVotar(serial);
+    //     console.log( serial2);
+
+    //     setTimeout(() => {
+    //         setSpin(false)
+    //     }, 500);
+    // }
     
   return (
     <div>
-      <form onChange={handleSubmit} className="flex items-center max-w-sm mx-auto">
+      <form className="flex items-center max-w-sm mx-auto">
         <div className="relative w-full">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
@@ -44,6 +61,7 @@ const SearchBar = () => {
           </div>
           <input
             type="number"
+            onChange={e=> setSearch(e.target.value)}
             id="simple-search"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Input Votar NID Number"
@@ -53,8 +71,8 @@ const SearchBar = () => {
       </form>
 
       {
-        spin ? <div className="mt-5 text-center"><Spinner /></div> : <div>{ votar ? <DisplayData votar={votar} /> : <div className="text-center mt-5 text-red-400 font-bold text-2xl">No Data Found</div> }  </div>
-      }
+        <div>{ votar.length > 0 ? votar.sort((a, b) => (a.SLN > b.SLN) ? 1 : -1).map(votar=> <DisplayData key={votar.id} votar={votar} />)  : <div className="text-center mt-5 text-red-400 font-bold text-2xl">No Data Found</div> }  </div>
+      } 
 
     </div>
   );
