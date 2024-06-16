@@ -1,6 +1,6 @@
 const DisplayData = ({votar}) => {
     // console.log(votar);
-    const { SLN, name, NID, gender, father } = votar
+    const { SLN, name, NID, father } = votar
   return (
     <div>
       <div className="overflow-x-auto rounded-2xl p-2">
@@ -9,7 +9,6 @@ const DisplayData = ({votar}) => {
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
                 <p>Father: {father}</p>
-                <p>Gender: {gender}</p>
                 <p>NID: {NID}</p>
                 <p>Serial NO: {SLN}</p>
                 <div className="card-actions mt-2 justify-between">

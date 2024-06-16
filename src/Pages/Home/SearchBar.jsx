@@ -8,35 +8,19 @@ const SearchBar = () => {
 
     useEffect(() => {
       if (dataLists) {
-        let filtered = dataLists
   
         if (search) {
-          filtered = filtered.filter(list =>
+          const lists = dataLists.filter(list =>
             list.NID.toString().startsWith(search) || list.SLN.toString().startsWith(search)
           )
+          setVotar(lists)
+        }else {
+          setVotar([])
         }
-        console.log(filtered);
-        setVotar(filtered)
       }
     }, [search])
     
-
-
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     setSpin(true)
-    //     const number = e.target.value
-    //     const serial =  dataLists.find(votar =>  votar.NID == +number);
-    //     // const serial =  dataLists.find(votar =>  number.includes(votar.NID));
-    //     const serial2 =  dataLists.filter(votar =>  votar.NID.includes(number));
-    //     setVotar(serial);
-    //     console.log( serial2);
-
-    //     setTimeout(() => {
-    //         setSpin(false)
-    //     }, 500);
-    // }
+    console.log(votar);
     
   return (
     <div>
