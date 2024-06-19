@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 
 const SweetAlertMessage = (SAM) => {
-  const { title,icon,text, lastTitle } = SAM;
+  const { title,icon,text, lastTitle } = SAM
   Swal.fire({
     title: title || "Adding a Votar",
     html: "Please Wait....",

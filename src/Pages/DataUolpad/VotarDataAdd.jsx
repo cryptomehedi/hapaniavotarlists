@@ -1,14 +1,25 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import SweetAlertMessage from "../Shared/SweetAlertMessage";
+import axios from "axios";
 
 const VotarDataAdd = () => {
   const [loading, setLoading] = useState(false);
   const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
-  const onSubmit = async data =>{
+  const onSubmit = async data =>{ 
+    const votar = data
     console.log(data);
-    SweetAlertMessage()
+    await axios.post('https://hapaniavotarlists-server.vercel.app/api/v1/votarList', votar)
+    .then(data=>{
+      console.log(data);
+      if (data?.data?.success === true ){ 
+        SweetAlertMessage({})
+      } else {
+        SweetAlertMessage({icon: "error", lastTitle: data?.data?.massage, text: "Check again"})
+      }
+    })
+    
     setLoading(true)
     setTimeout(() => {
         setLoading(false)
@@ -27,7 +38,7 @@ const VotarDataAdd = () => {
               <span className="label-text">Votar Serial NO</span>
             </label>
             <input
-            {...register("votarSerial", { required: "Votar Serial NO is required", maxLength: {value:4 , message: "only 4 character"}})}
+            {...register("SLN", { required: "Votar Serial NO is required", maxLength: {value:4 , message: "only 4 character"}})}
               type="tel"
               maxLength={4}
               placeholder="Votar Serial NO"
@@ -40,7 +51,7 @@ const VotarDataAdd = () => {
               <span className="label-text">Votar Name</span>
             </label>
             <input 
-                {...register("votarName", { required: "Votar Name is required"  })}
+                {...register("name", { required: "Votar Name is required"  })}
               type="text"
               placeholder="Votar Name"
               className="input input-bordered"
@@ -53,7 +64,7 @@ const VotarDataAdd = () => {
               <span className="label-text">Votar Father Name</span>
             </label>
             <input
-            {...register("votarFatherName", { required: "Votar Father Name is required"  })}
+            {...register("father", { required: "Votar Father Name is required"  })}
               type="text"
               placeholder="Votar Father Name"
               className="input input-bordered"
@@ -70,7 +81,7 @@ const VotarDataAdd = () => {
               name="gender"
               className="select select-bordered w-full max-w-xs"
             >
-              <option value="Male">Men</option>
+              <option value="male">Men</option>
               <option value="female">Women</option>
             </select>
           </div>
@@ -79,7 +90,7 @@ const VotarDataAdd = () => {
               <span className="label-text">Votar NID No</span>
             </label>
             <input
-            {...register("votarNID", { required: "Votar NID No is required" , minLength: {value:10 , message: "PLease Check NID Number Again"} })}
+            {...register("NID", { required: "Votar NID No is required" , minLength: {value:10 , message: "PLease Check NID Number Again"} })}
               type="tel"
               maxLength={10}
               placeholder="Votar NID No"

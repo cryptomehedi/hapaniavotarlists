@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
-import dataLists from "../../Data/DataList.json"
+// import dataLists from "../../Data/DataList.json"
 import DisplayData from "./DisplayData";
+import axios from "axios";
 
 const SearchBar = () => {
     const [votar, setVotar] = useState([])
     const [search, setSearch] = useState()
+    const [dataLists, setDatalist] = useState([])
+
+  useEffect(() => {
+    axios.get('https://hapaniavotarlists-server.vercel.app/api/v1/votarList')
+    .then(data => setDatalist(data.data))
+  }, [])
 
     useEffect(() => {
       if (dataLists) {
@@ -18,9 +25,8 @@ const SearchBar = () => {
           setVotar([])
         }
       }
-    }, [search])
+    }, [search, dataLists])
     
-    console.log(votar);
     
   return (
     <div>
@@ -55,7 +61,7 @@ const SearchBar = () => {
       </form>
 
       {
-        <div>{ votar.length > 0 ? votar.sort((a, b) => (a.SLN > b.SLN) ? 1 : -1).map(votar=> <DisplayData key={votar.id} votar={votar} />)  : <div className="text-center mt-5 text-red-400 font-bold text-2xl">No Data Found</div> }  </div>
+        <div>{ votar.length > 0 ? votar.sort((a, b) => (a.SLN > b.SLN) ? 1 : -1).map(votar=> <DisplayData key={votar._id} votar={votar} />)  : <div className="text-center mt-5 text-red-400 font-bold text-2xl">No Data Found</div> }  </div>
       } 
 
     </div>
