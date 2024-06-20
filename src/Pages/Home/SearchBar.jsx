@@ -1,33 +1,33 @@
-import { useEffect, useState } from "react";
-// import dataLists from "../../Data/DataList.json"
+import { useContext, useEffect, useState } from "react";
 import DisplayData from "./DisplayData";
-import axios from "axios";
+import { VotarContext } from "../../Context/VotarContext";
 
 const SearchBar = () => {
-    const [votar, setVotar] = useState([])
-    const [search, setSearch] = useState()
-    const [dataLists, setDatalist] = useState([])
+  const [votar, setVotar] = useState([]);
+  const [search, setSearch] = useState();
+  const [dataLists, setDatalist] = useState([]);
+  const data = useContext(VotarContext);
+  useEffect(() => {
+    if (data) {
+      setDatalist(data);
+    }
+  }, [data]);
 
   useEffect(() => {
-    axios.get('https://hapaniavotarlists-server.vercel.app/api/v1/votarList')
-    .then(data => setDatalist(data.data))
-  }, [])
-
-    useEffect(() => {
-      if (dataLists) {
-  
-        if (search) {
-          const lists = dataLists.filter(list =>
-            list.NID.toString().startsWith(search) || list.SLN.toString().startsWith(search)
-          )
-          setVotar(lists)
-        }else {
-          setVotar([])
-        }
+    if (dataLists) {
+      if (search) {
+        const lists = dataLists.filter(
+          (list) =>
+            list.NID.toString().startsWith(search) ||
+            list.SLN.toString().startsWith(search)
+        );
+        setVotar(lists);
+      } else {
+        setVotar([]);
       }
-    }, [search, dataLists])
-    
-    
+    }
+  }, [search, dataLists]);
+
   return (
     <div>
       <form className="flex items-center max-w-sm mx-auto">
@@ -51,7 +51,7 @@ const SearchBar = () => {
           </div>
           <input
             type="number"
-            onChange={e=> setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             id="simple-search"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Input Votar NID Number"
@@ -61,9 +61,18 @@ const SearchBar = () => {
       </form>
 
       {
-        <div>{ votar.length > 0 ? votar.sort((a, b) => (a.SLN > b.SLN) ? 1 : -1).map(votar=> <DisplayData key={votar._id} votar={votar} />)  : <div className="text-center mt-5 text-red-400 font-bold text-2xl">No Data Found</div> }  </div>
-      } 
-
+        <div>
+          {votar.length > 0 ? (
+            votar
+              .sort((a, b) => (a.SLN > b.SLN ? 1 : -1))
+              .map((votar) => <DisplayData key={votar._id} votar={votar} />)
+          ) : (
+            <div className="text-center mt-5 text-red-400 font-bold text-2xl">
+              No Data Found
+            </div>
+          )}{" "}
+        </div>
+      }
     </div>
   );
 };
