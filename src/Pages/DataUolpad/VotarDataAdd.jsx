@@ -32,7 +32,7 @@ const VotarDataAdd = () => {
     <div className="md:flex md:justify-center my-2 mb-16">
       <div className="card md:w-96 lg:w-4/6 bg-base-100 shadow-xl p-2">
         <h2 className="text-3xl text-center shadow-xl rounded-full">Add New Votar</h2>
-        <form onSubmit={handleSubmit(onSubmit)} >
+        <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" >
           <div className="form-control shadow-xl p-1 rounded-lg">
             <label className="label">
               <span className="label-text">Votar Serial NO</span>
