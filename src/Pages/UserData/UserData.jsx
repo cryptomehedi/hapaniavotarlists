@@ -31,6 +31,7 @@ const UserData = () => {
           <Spinner />
         </div>
       ) : (
+        userData.length > 0 ? 
         <div className="grid grid-cols md:grid-cols-2 lg:grid-cols-4 gap-3">
           {userData
             .sort((a, b) => (a.SLN > b.SLN ? 1 : -1))
@@ -41,7 +42,9 @@ const UserData = () => {
                 </div>
               );
             })}
-        </div>
+        </div> : <div className="text-center mt-5 text-red-400 font-bold text-2xl">
+              No Data Found
+            </div>
       )}
     </div>
   );

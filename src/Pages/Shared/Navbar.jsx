@@ -20,6 +20,9 @@ const Navbar = () => {
             <CustomLink to="/womenLists">Women</CustomLink>
           </li>
           <li>
+            <CustomLink to="/votaradd">Add</CustomLink>
+          </li>
+          <li>
             <CustomLink to="/login">Login</CustomLink>
           </li>
         </ul>
