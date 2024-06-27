@@ -7,8 +7,8 @@ import { VotarProvider } from "./Context/VotarProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <VotarProvider>
-    <React.StrictMode>
+    
       <RouterProvider router={router} />
-    </React.StrictMode>
+   
     </VotarProvider>
 );

@@ -1,79 +1,67 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import DisplayData from "./DisplayData";
 import { VotarContext } from "../../Context/VotarContext";
+import allCategories from "../../Data/categories.json";
 
 const SearchBar = () => {
-  const [votar, setVotar] = useState([]);
-  const [search, setSearch] = useState();
-  const [dataLists, setDatalist] = useState([]);
-  const data = useContext(VotarContext);
-  useEffect(() => {
-    if (data) {
-      setDatalist(data);
-    }
-  }, [data]);
+  const [selectedCategory, setSelectedCategory] = useState("ekdala");
+  const [searchText, setSearchText] = useState("");
+  const votarList = useContext(VotarContext);
 
-  useEffect(() => {
-    if (dataLists) {
-      if (search) {
-        const lists = dataLists.filter(
-          (list) =>
-            list.NID.toString().startsWith(search) ||
-            list.SLN.toString().startsWith(search)
+  const filteredList =
+    votarList.length > 1 && selectedCategory === "ekdala"
+      ? votarList.filter(
+          (votar) =>
+            votar.name.toLowerCase().includes(searchText.toLowerCase())
+        )
+      : votarList.filter(
+          (votar) =>
+            votar.address === selectedCategory &&
+            votar.name.toLowerCase().includes(searchText.toLowerCase())
         );
-        setVotar(lists);
-      } else {
-        setVotar([]);
-      }
-    }
-  }, [search, dataLists]);
 
   return (
     <div>
-      <form className="flex items-center max-w-sm mx-auto">
-        <div className="relative w-full">
-          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 18 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"
-              />
-            </svg>
+      <form className="max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
+        <div className="flex">
+          <select
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className=" py-2.5 w-32 px-2 text-sm font-medium  text-gray-500 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+          >
+            {allCategories.map((category, i) => (
+              <option key={i} value={category.value}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <div className="relative w-full">
+            <input
+              type="search"
+              onChange={(e) => setSearchText(e.target.value)}
+              id="location-search"
+              className="block flex-initial p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+              placeholder="Input Votar Name"
+              required
+            />
           </div>
-          <input
-            type="number"
-            onChange={(e) => setSearch(e.target.value)}
-            id="simple-search"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Input Votar NID Number"
-            required
-          />
         </div>
       </form>
 
       {
         <div>
-          {votar.length > 0 ? (
-            votar
+          {filteredList.length > 0 ? (
+            filteredList
               .sort((a, b) => (a.SLN > b.SLN ? 1 : -1))
               .map((votar) => <DisplayData key={votar._id} votar={votar} />)
           ) : (
             <div className="text-center mt-5 text-red-400 font-bold text-2xl">
               No Data Found
             </div>
-          )}{" "}
+          )}
         </div>
       }
     </div>
   );
 };
+
 export default SearchBar;

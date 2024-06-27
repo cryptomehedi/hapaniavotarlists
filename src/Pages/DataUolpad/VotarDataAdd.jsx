@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import SweetAlertMessage from "../Shared/SweetAlertMessage";
 import axios from "axios";
+import allCategories from "../../Data/categories.json"
 
 const VotarDataAdd = () => {
   const [loading, setLoading] = useState(false);
@@ -42,18 +43,9 @@ const VotarDataAdd = () => {
               name="address"
               className="select select-bordered w-full max-w-xs"
             >
-              <option value="ekdala">একডালা</option>
-              <option value="ekdala-purbo">একডালা পুর্ব পাড়া</option>
-              <option value="ekdala-pukur">একডালা পুকুর পাড়া</option>
-              <option value="ekdala-boiragi">একডালা বৈরাগী পাড়া</option>
-              <option value="ekdala-dokkhin">একডালা দক্ষিণ পাড়া</option>
-              <option value="ekdala-hapaniamore">একডালা হাপানিয়া মোড়</option>
-              <option value="ekdala-mastar">একডালা মাস্টার পাড়া</option>
-              <option value="ekdala-sordar">একডালা সরদার পাড়া</option>
-              <option value="ekdala-haji">একডালা হাজী পাড়া</option>
-              <option value="ekdala-grameen">একডালা গ্রামীন ব্যাংক</option>
-              <option value="ekdala-moddho">একডালা মধ্য পাড়া</option>
-              <option value="ekdala-dukha">একডালা দুখা পাড়া</option>
+             {
+              allCategories.map(i=> <option key={i.id} value={i.value}>{i.name}</option>)
+            }
             </select>
           </div>
           <div className="form-control shadow-xl p-1 rounded-lg">

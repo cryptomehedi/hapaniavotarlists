@@ -1,0 +1,62 @@
+[
+    {
+        "id" : 2,
+        "name" : "একডালা", 
+        "value" : "ekdala"
+    },
+    {
+        "id" : 3,
+        "name" : "একডালা পুর্ব পাড়া", 
+        "value" : "ekdala-purbo"
+    },
+    {
+        "id" : 4,
+        "name" : "একডালা পুকুর পাড়া", 
+        "value" : "ekdala-pukur"
+    },
+    {
+        "id" : 5,
+        "name" : "একডালা বৈরাগী পাড়া", 
+        "value" : "ekdala-boiragi"
+    },
+    {
+        "id" : 6,
+        "name" : "একডালা দক্ষিণ পাড়া", 
+        "value" : "ekdala-dokkhin"
+    },
+    {
+        "id" : 7,
+        "name" : "একডালা হাপানিয়া মোড়", 
+        "value" : "ekdala-hapaniamore"
+    },
+    {
+        "id" : 8,
+        "name" : "একডালা মাস্টার পাড়া", 
+        "value" : "ekdala-mastar"
+    },
+    {
+        "id" : 9,
+        "name" : "একডালা সরদার পাড়া", 
+        "value" : "ekdala-sordar"
+    },
+    {
+        "id" : 10,
+        "name" : "একডালা হাজী পাড়া", 
+        "value" : "ekdala-haji"
+    },
+    {
+        "id" : 11,
+        "name" : "একডালা গ্রামীন ব্যাংক", 
+        "value" : "ekdala-grameen"
+    },
+    {
+        "id" : 13,
+        "name" : "একডালা মধ্য পাড়া", 
+        "value" : "ekdala-moddho"
+    },
+    {
+        "id" : 12,
+        "name" : "একডালা দুখা পাড়া", 
+        "value" : "ekdala-dukha"
+    }
+]
